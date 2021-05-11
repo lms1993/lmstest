@@ -15,12 +15,12 @@ steps:
 - task: AzureCLI@2
   inputs:
     azureSubscription: 'NTT-Japan PaaS Developer(7)(6747898f-5136-4160-9d4c-848883672ac2)'
-    scriptType: 'ps'
+    scriptType: 'pscore'
     scriptLocation: 'inlineScript'
     inlineScript: 'az storage blob upload --account-name lmsstoragemain -f /home/lee/text.txt -c test -n "2. S1.txt" --auth-mode login'
  
 - task: AzureCLI@2
   inputs:
-    scriptType: 'ps'
+    scriptType: 'pscore'
     scriptLocation: 'inlineScript'
     inlineScript: 'az storage blob delete -c test -n "2. S1.txt" --account-name lmsstoragemain --auth-mode login --if-unmodified-since $(StartDate)'
