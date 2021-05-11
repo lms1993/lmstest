@@ -21,4 +21,9 @@ steps:
     csmFileLink: 'https://github.com/lms1993/lmstest.git'
     deploymentMode: 'Incremental'
 
-
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'NTT-Japan PaaS Developer(5)(6747898f-5136-4160-9d4c-848883672ac2)'
+    scriptType: 'ps'
+    scriptLocation: 'scriptPath'
+    scriptPath: '.cmd'
