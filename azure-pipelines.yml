@@ -18,7 +18,7 @@ steps:
 - task: AzureCLI@2
   inputs:
     azureSubscription: 'NTT-Japan PaaS Developer(5)(6747898f-5136-4160-9d4c-848883672ac2)'
-    scriptType: 'ps'
+    scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: 'az storage blob upload --account-name lmsstoragemain -f /home/lee/text.txt -c test -n "2. S1.txt" --auth-mode login'
   displayName: upload document
@@ -29,7 +29,7 @@ steps:
 - task: AzureCLI@2
   inputs:
     azureSubscription: 'NTT-Japan PaaS Developer(5)(6747898f-5136-4160-9d4c-848883672ac2)'
-    scriptType: 'ps'
+    scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
       # delete files which was NOT updated in this pipelines
