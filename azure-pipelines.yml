@@ -15,23 +15,16 @@ steps:
     now=`date '+%Y-%m-%dT%H:%MZ'`
     echo "##vso[task.setvariable variable=StartDate;]$now"
 
+
 - task: AzureCLI@2
   inputs:
-    azureSubscription: 'NTT-Japan PaaS Developer(5)(6747898f-5136-4160-9d4c-848883672ac2)'
-    scriptType: 'bash'
+    azureSubscription: 'NTT-Japan PaaS Developer(7)(6747898f-5136-4160-9d4c-848883672ac2)'
+    scriptType: 'ps'
     scriptLocation: 'inlineScript'
     inlineScript: 'az storage blob upload --account-name lmsstoragemain -f /home/lee/text.txt -c test -n "2. S1.txt" --auth-mode login'
-  displayName: upload document
-
-
-
-
+ 
 - task: AzureCLI@2
   inputs:
-    azureSubscription: 'NTT-Japan PaaS Developer(5)(6747898f-5136-4160-9d4c-848883672ac2)'
-    scriptType: 'bash'
+    scriptType: 'ps'
     scriptLocation: 'inlineScript'
-    inlineScript: |
-      # delete files which was NOT updated in this pipelines
-      az storage blob delete -c test -n "2. S1.txt" --account-name lmsstoragemain --auth-mode login --if-unmodified-since $(StartDate)
-  displayName: delete unmodified files
+    inlineScript: 'az storage blob delete -c test -n "2. S1.txt" --account-name lmsstoragemain --auth-mode login --if-unmodified-since $(StartDate)'
