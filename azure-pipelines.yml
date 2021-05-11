@@ -10,16 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: AzureResourceManagerTemplateDeployment@3
-  inputs:
-    deploymentScope: 'Resource Group'
-    subscriptionId: '6747898f-5136-4160-9d4c-848883672ac2'
-    action: 'Create Or Update Resource Group'
-    resourceGroupName: 'LMSG'
-    location: 'Japan East'
-    templateLocation: 'URL of the file'
-    csmFileLink: 'https://github.com/lms1993/lmstest.git'
-    deploymentMode: 'Incremental'
+
 
 - task: AzureCLI@2
   inputs:
