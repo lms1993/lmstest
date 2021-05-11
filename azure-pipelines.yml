@@ -8,7 +8,23 @@ trigger:
 
 pool:
   vmImage: ubuntu-latest
-
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'NTT-Japan PaaS Developer(6747898f-5136-4160-9d4c-848883672ac2)'
+    subscriptionId: '6747898f-5136-4160-9d4c-848883672ac2'
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'NTT-Japan PaaS Developer(1)(6747898f-5136-4160-9d4c-848883672ac2)'
+    scriptType: 'ps'
+    scriptLocation: 'scriptPath'
+    scriptPath: '.cmd'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'LMSG'
+    location: 'Japan East'
+    templateLocation: 'URL of the file'
+    csmFileLink: 'https://github.com/lms1993/lmstest.git'
+    deploymentMode: 'Incremental'
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
