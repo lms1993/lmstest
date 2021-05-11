@@ -17,4 +17,4 @@ steps:
     azureSubscription: 'NTT-Japan PaaS Developer(5)(6747898f-5136-4160-9d4c-848883672ac2)'
     scriptType: 'ps'
     scriptLocation: 'scriptPath'
-    scriptPath: '.cmd'
+    scriptPath: 'C:\LMS\L200\lmstest.sh'
