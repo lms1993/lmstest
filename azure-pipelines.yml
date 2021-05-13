@@ -13,7 +13,6 @@ steps:
 - script: |
     now=`date '+%Y-%m-%dT%H:%MZ'`
     echo "##vso[task.setvariable variable=StartDate;]$now"
-    touch test.txt
 
 - task: AzureCLI@2
   inputs:
