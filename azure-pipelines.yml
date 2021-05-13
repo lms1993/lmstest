@@ -13,13 +13,8 @@ steps:
 - script: |
     now=`date '+%Y-%m-%dT%H:%MZ'`
     echo "##vso[task.setvariable variable=StartDate;]$now"
-    
-- task: AzureCLI@2
-  inputs:
-    azureSubscription: 'NTT-Japan PaaS Developer(7)(6747898f-5136-4160-9d4c-848883672ac2)'
-    scriptType: 'pscore'
-    scriptLocation: 'inlineScript'
-    inlineScript: 'touch test.txt'
+    touch test.txt
+
 - task: AzureCLI@2
   inputs:
     azureSubscription: 'NTT-Japan PaaS Developer(7)(6747898f-5136-4160-9d4c-848883672ac2)'
@@ -29,6 +24,7 @@ steps:
  
 - task: AzureCLI@2
   inputs:
+    azureSubscription: 'NTT-Japan PaaS Developer(7)(6747898f-5136-4160-9d4c-848883672ac2)'
     scriptType: 'pscore'
     scriptLocation: 'inlineScript'
     inlineScript: 'az storage blob delete -c test -n "2. S1.txt" --account-name lmsstoragemain --auth-mode login --if-unmodified-since $(StartDate)'
