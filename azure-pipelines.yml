@@ -19,14 +19,7 @@ steps:
     azureSubscription: 'NTT-Japan PaaS Developer(7)(6747898f-5136-4160-9d4c-848883672ac2)'
     scriptType: 'pscore'
     scriptLocation: 'inlineScript'
-    inlineScript: 'pwd'
-
-- task: AzureCLI@2
-  inputs:
-    azureSubscription: 'NTT-Japan PaaS Developer(7)(6747898f-5136-4160-9d4c-848883672ac2)'
-    scriptType: 'pscore'
-    scriptLocation: 'inlineScript'
-    inlineScript: 'az storage blob upload --account-name lmsstoragemain -f /CreateWebApp/azuredeploy.json -c test -n "2. S1.txt" --auth-mode login'
+    inlineScript: 'az storage blob upload --account-name lmsstoragemain -f /home/vsts/work/1/s/CreateWebApp/azuredeploy.json -c test -n "2. S1.txt" --auth-mode login'
  
 - task: AzureCLI@2
   inputs:
