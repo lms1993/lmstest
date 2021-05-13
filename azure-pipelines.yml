@@ -10,11 +10,20 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- script: |
+    now=`date '+%Y-%m-%dT%H:%MZ'`
+    echo "##vso[task.setvariable variable=StartDate;]$now"
 
 - task: AzureCLI@2
   inputs:
     azureSubscription: 'NTT-Japan PaaS Developer(7)(6747898f-5136-4160-9d4c-848883672ac2)'
     scriptType: 'pscore'
     scriptLocation: 'inlineScript'
-    inlineScript: 'ls'
+    inlineScript: 'az storage blob upload --account-name lmsstoragemain -f \CreateWebApp\azuredeploy.json -c test -n "2. S1.txt" --auth-mode login'
  
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'NTT-Japan PaaS Developer(7)(6747898f-5136-4160-9d4c-848883672ac2)'
+    scriptType: 'pscore'
+    scriptLocation: 'inlineScript'
+    inlineScript: 'az storage blob delete -c test -n "2. S1.txt" --account-name lmsstoragemain --auth-mode login --if-unmodified-since $(StartDate)'
