@@ -11,7 +11,9 @@ pool:
 
 steps:
 
-
+- script: |
+    now=`date '+%Y-%m-%dT%H:%MZ'`
+    echo "##vso[task.setvariable variable=StartDate;]$now"
 - task: AzureCLI@2
   inputs:
     azureSubscription: 'NTT-Japan PaaS Developer(7)(6747898f-5136-4160-9d4c-848883672ac2)'
@@ -19,9 +21,7 @@ steps:
     scriptLocation: 'inlineScript'
     inlineScript: 'az storage blob upload --account-name lmsstoragemain -f /home/vsts/work/1/s/CreateWebApp/azuredeploy.json -c test -n "2. S1.txt" --auth-mode login'
 
-- script: |
-    now=`date '+%Y-%m-%dT%H:%MZ'`
-    echo "##vso[task.setvariable variable=StartDate;]$now"
+
  
 - task: AzureCLI@2
   inputs:
