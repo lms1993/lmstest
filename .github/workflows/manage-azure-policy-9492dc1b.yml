@@ -1,0 +1,32 @@
+name: manage-azure-policy-9492dc1b
+on:
+  workflow_dispatch:
+    inputs:
+      remarks:
+        description: 'Reason for triggering the workflow run'
+        required: false
+        default: 'Updating Azure Policies'
+
+
+## Uncomment the following if you wish to automatically trigger workflow run with every commit
+#
+#  push:
+#    paths:
+#      - 'home1/initiatives/Azure_Monitor_エージェントを_Linux_仮想マシンに構成し、データ収集ルールに関連付ける_118f04da-0375-44d1-84e3-0fd9e1849403/**'
+#      - .github/workflows/manage-azure-policy-9492dc1b.yml
+jobs:
+  apply-azure-policy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS_9492dc1b}}
+        allow-no-subscriptions: true
+    - name: Create or Update Azure Policies
+      uses: azure/manage-azure-policy@v0
+      with:
+        paths: |
+          home1/initiatives/Azure_Monitor_エージェントを_Linux_仮想マシンに構成し、データ収集ルールに関連付ける_118f04da-0375-44d1-84e3-0fd9e1849403/**

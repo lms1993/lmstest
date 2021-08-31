@@ -1,0 +1,72 @@
+{
+ "properties": {
+  "displayName": "Azure Monitor エージェントを Linux 仮想マシンに構成し、データ収集ルールに関連付ける",
+  "policyType": "BuiltIn",
+  "description": "定義されている一覧に仮想マシン イメージ (OS) と場所があり、Linux 仮想マシン用の Azure Monitor エージェントがインストールされていない場合は、そのエージェントをデプロイします。その後、関連付けをデプロイして、指定したデータ収集ルールに仮想マシンをリンクします。OS イメージの一覧は、今後のサポートの拡大に伴って更新されます。",
+  "metadata": {
+   "version": "1.0.0",
+   "category": "Monitoring"
+  },
+  "parameters": {
+   "effect": {
+    "type": "String",
+    "metadata": {
+     "displayName": "効果",
+     "description": "ポリシーの実行を有効または無効にします。"
+    },
+    "allowedValues": [
+     "DeployIfNotExists",
+     "Disabled"
+    ],
+    "defaultValue": "DeployIfNotExists"
+   },
+   "listOfLinuxImageIdToInclude": {
+    "type": "Array",
+    "metadata": {
+     "displayName": "省略可能: スコープに追加する、サポートされる Linux OS を持つ仮想マシン イメージの一覧",
+     "description": "値の例: '/subscriptions/<subscriptionId>/resourceGroups/YourResourceGroup/providers/Microsoft.Compute/images/ContosoStdImage'"
+    },
+    "defaultValue": []
+   },
+   "DcrResourceId": {
+    "type": "String",
+    "metadata": {
+     "displayName": "データ収集ルールのリソース ID",
+     "description": "スコープ内の仮想マシンからポイントする必要のあるデータ収集ルールのリソース ID。"
+    }
+   }
+  },
+  "policyDefinitions": [
+   {
+    "policyDefinitionReferenceId": "deployAzureMonitoringAgentLinux",
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/a4034bc6-ae50-406d-bf76-50f4ee5a7811",
+    "parameters": {
+     "effect": {
+      "value": "[parameters('effect')]"
+     },
+     "listOfLinuxImageIdToInclude": {
+      "value": "[parameters('listOfLinuxImageIdToInclude')]"
+     }
+    }
+   },
+   {
+    "policyDefinitionReferenceId": "associateDataCollectionRuleLinux",
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/2ea82cdd-f2e8-4500-af75-67a2e084ca74",
+    "parameters": {
+     "effect": {
+      "value": "[parameters('effect')]"
+     },
+     "listOfLinuxImageIdToInclude": {
+      "value": "[parameters('listOfLinuxImageIdToInclude')]"
+     },
+     "DcrResourceId": {
+      "value": "[parameters('DcrResourceId')]"
+     }
+    }
+   }
+  ]
+ },
+ "id": "/providers/Microsoft.Authorization/policySetDefinitions/118f04da-0375-44d1-84e3-0fd9e1849403",
+ "type": "Microsoft.Authorization/policySetDefinitions",
+ "name": "118f04da-0375-44d1-84e3-0fd9e1849403"
+}
